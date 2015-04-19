@@ -1,7 +1,7 @@
 #
 # Nasqueron  - Base nginx / php-fpm image
 #
-a
+
 FROM debian:jessie
 MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-win.org>
 
