@@ -22,7 +22,7 @@ ENV PHP_BUILD_DEPS bzip2 \
 		libssl-dev \
 		libxml2-dev
 RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
-    gcc libc-dev make pkg-config $PHP_BUILD_DEPS $PHP_EXTRA_BUILD_DEPS \
+    gcc libc-dev make pkg-config nginx-full $PHP_BUILD_DEPS $PHP_EXTRA_BUILD_DEPS \
     --no-install-recommends && rm -r /var/lib/apt/lists/*
 
 # PHP build and installation
@@ -72,6 +72,7 @@ RUN groupadd -r app -g 433 && \
 COPY docker-php-ext-* /usr/local/bin/
 COPY php-fpm.conf /usr/local/etc/
 
-VOLUME /var/wwwroot/html
+VOLUME ["/var/wwwroot/default", "/etc/nginx"]
 
 EXPOSE 80
+EXPOSE 443
