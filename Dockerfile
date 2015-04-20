@@ -71,6 +71,8 @@ RUN groupadd -r app -g 433 && \
 
 COPY docker-php-ext-* /usr/local/bin/
 COPY php-fpm.conf /usr/local/etc/
+COPY date.ini /usr/local/etc/php/conf.d/
+COPY nginx-default-vhost.conf /etc/nginx/sites-available/default
 
 VOLUME ["/var/wwwroot/default", "/etc/nginx"]
 
