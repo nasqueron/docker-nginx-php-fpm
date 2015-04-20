@@ -1,0 +1,14 @@
+This image is based on the following ones:
+
+  * php:fpm
+    https://github.com/docker-library/php/blob/08bf31dfd492f02a2696c9a30eb85326b1570abd/5.6/fpm/Dockerfile
+
+  * nginx
+    https://github.com/dockerfile/nginx/blob/102e2ffe0652aad9c8f0266c2a6d064d4e2b44d8/Dockerfile
+
+Once running, you can quickly add PHP extensions to this image, with docker-php-ext-configure and
+docker-php-ext-install scripts.
+
+Out of the box, it offers a working nginx on port 80 and php-fpm webserver.
+
+Your web directory, if you don't add vhosts, is /var/wwwroot/default (mounted as volume).
