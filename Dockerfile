@@ -69,12 +69,23 @@ RUN groupadd -r app -g 433 && \
 	chmod 700 /home/app && \
 	chmod 711 /var/wwwroot/default
 
+#Configuration
 COPY docker-php-ext-* /usr/local/bin/
 COPY php-fpm.conf /usr/local/etc/
 COPY date.ini /usr/local/etc/php/conf.d/
 COPY nginx-default-vhost.conf /etc/nginx/sites-available/default
 
+#Docker properties
 VOLUME ["/var/wwwroot/default", "/etc/nginx"]
 
 EXPOSE 80
 EXPOSE 443
+
+CMD ["/usr/sbin/runsvdir-start"]
+
+# To move infra
+RUN apt-get update && apt-get install -y \
+    runit nano less tmux wget \
+    --no-install-recommends && rm -r /var/lib/apt/lists/*
+RUN echo "\n\ndaemon off;" >> /etc/nginx/nginx.conf
+COPY service /etc/service
