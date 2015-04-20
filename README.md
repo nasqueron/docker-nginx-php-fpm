@@ -1,6 +1,6 @@
 # Nginx, php-fpm and runit base image
 
-##Description
+## Description
 
 Out of the box, this image offers a working nginx and php-fpm webserver.
 This image is intended to allow to run a PHP application either passing
