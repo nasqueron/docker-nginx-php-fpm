@@ -12,3 +12,18 @@ docker-php-ext-install scripts.
 Out of the box, it offers a working nginx on port 80 and php-fpm webserver.
 
 Your web directory, if you don't add vhosts, is /var/wwwroot/default (mounted as volume).
+
+To rebuild the image:
+
+    docker build --tag nasqueron/nginx-php-fpm .
+
+To launch a container to execute a PHP application in /data/awesome-php-app at http://localhost:8080:
+
+    docker run -d -v /data/awesome-php-app:/var/wwwroot/default -p 8080:80 nasqueron/nginx-php-fpm
+
+To create an image for an application with thisas base, create a Dockerfile:
+
+    FROM nasqueron/docker-nginx-php-fpm
+    # Debian commands to deploy your application code
+    # If you need other processes, adds a /etc/service/<service name>/run file
+    # That'is it.
