@@ -50,6 +50,8 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 6E4F6AB321FDC07F2C332E3A
 		--enable-calendar \
 		--with-curl \
 		--with-gd \
+		--with-jpeg-dir \
+		--enable-gd-native-ttf \
 		--enable-mbstring \
 		--with-mcrypt \
 		--with-mysqli \
