@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 exec 2>&1
 source /usr/local/etc/envvars
 exec /usr/local/sbin/php-fpm --nodaemonize
