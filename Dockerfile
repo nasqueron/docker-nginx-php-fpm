@@ -60,11 +60,15 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 6E4F6AB321FDC07F2C332E3A
 		--with-openssl \
 		--with-readline \
 		--with-zlib \
+		--enable-zip \
 	&& make -j"$(nproc)" \
 	&& make install \
 	&& { find /usr/local/bin /usr/local/sbin -type f -executable -exec strip --strip-all '{}' + || true; } \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps \
-	&& make clean
+	&& make clean \
+	&& cd /opt \
+	&& curl -sS https://getcomposer.org/installer | php \
+	&& ln -s /opt/composer.phar /usr/local/bin/composer
 
 RUN groupadd -r app -g 433 && \
 	mkdir /home/app && \
