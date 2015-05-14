@@ -25,7 +25,7 @@ ENV PHP_BUILD_DEPS bzip2 \
 
 RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
     gcc libc-dev make pkg-config nginx-full \
-    runit nano less tmux wget \
+    runit nano less tmux wget git \
     $PHP_BUILD_DEPS $PHP_EXTRA_BUILD_DEPS \
     --no-install-recommends && rm -r /var/lib/apt/lists/*
 
