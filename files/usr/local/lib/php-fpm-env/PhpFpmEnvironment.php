@@ -29,7 +29,7 @@ class PhpFpmEnvironment {
     ];
 
     /**
-     *ets an environment array from the current process environment,
+     * Gets an environment array from the current process environment,
      * with PATH and temp variablesfiltered.
      *
      * @return Array
