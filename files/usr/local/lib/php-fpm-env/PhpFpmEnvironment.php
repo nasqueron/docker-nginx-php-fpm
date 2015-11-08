@@ -38,19 +38,45 @@ class PhpFpmEnvironment {
         $variables = [];
 
         foreach ($_ENV as $key => $value) {
-            if (static::mustIgnoreVariable($key)) {
-                continue;
+            if (!static::mustIgnoreVariable($key)) {
+	            $variables[$key] = $value;
             }
-
-            $variables[$key] = $value;
         }
 
-        $variables['PATH'] = static::PATH;
+        static::addHardcodedEnvironmentVariables($variables);
+
+        return $variables;
+    }
+
+    /**
+     * Adds hardcoded and always wanted environment variables
+     * (path, temporary directory) to the specified array.
+     *
+     * @paran array $variables the array to add the variables to
+     */
+    public static function addHardcodedEnvironmentVariables (&$variables) {
+        static::addTempEnvironmentVariables ($variables);
+        static::addPathEnvironmentVariables ($variables);
+    }
+
+    /**
+     * Adds temporary directory environment variables to the specified array.
+     *
+     * @paran array $variables the array to add the variables to
+     */
+    public static function addTempEnvironmentVariables (&$variables) {
         $variables['TMP'] = static::TMP;
         $variables['TEMP'] = static::TMP;
         $variables['TMPDIR'] = static::TMP;
+    }
 
-        return $variables;
+    /**
+     * Adds temporary directory environment variables to the specified array.
+     *
+     * @paran array $variables the array to add the variables to
+     */
+    public static function addPathEnvironmentVariables (&$variables) {
+        $variables['PATH'] = static::PATH;
     }
 
     /**
