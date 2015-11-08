@@ -67,6 +67,7 @@ class PhpFpmEnvironment {
      */
     public static function printConfig () {
         $variables = static::getEnvironmentVariables();
+
         foreach ($variables as $key => $value) {
             echo 'env["', $key, '"] = "', $value, '"', PHP_EOL;
         }
