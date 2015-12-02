@@ -46,7 +46,7 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 6E4F6AB321FDC07F2C332E3A
 		--disable-cgi \
 		--enable-mysqlnd \
 		--enable-bcmath \
-		--enable-bz2 \
+		--with-bz2 \
 		--enable-calendar \
 		--with-curl \
 		--with-gd \
