@@ -23,6 +23,8 @@ ENV PHP_BUILD_DEPS bzip2 \
 		libssl-dev \
 		libxslt1-dev \
 		libxml2-dev
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
     gcc libc-dev make pkg-config nginx-full \
