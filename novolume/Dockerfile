@@ -83,7 +83,7 @@ RUN groupadd -r app -g 433 && \
 	chmod 700 /home/app && \
 	chmod 711 /var/wwwroot/default
 
-COPY ../files /
+COPY files /
 
 #
 # Docker properties
