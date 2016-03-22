@@ -2,8 +2,8 @@
 # Nasqueron  - Base nginx / php-fpm image
 #
 
-FROM armv7/armhf-debian
-MAINTAINER Kaliiixx <modepadu95@riseup.net> 
+FROM debian:jessie
+MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-win.org>
 
 #
 # Prepare the container
@@ -83,13 +83,11 @@ RUN groupadd -r app -g 433 && \
 	chmod 700 /home/app && \
 	chmod 711 /var/wwwroot/default
 
-COPY files / 
+COPY files /
 
 #
 # Docker properties
 #
-
-VOLUME ["/var/wwwroot/default", "/etc/nginx"]
 
 EXPOSE 80
 EXPOSE 443
