@@ -2,8 +2,8 @@
 # Nasqueron  - Base nginx / php-fpm image
 #
 
-FROM debian:jessie
-MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-win.org>
+FROM armv7/armhf-debian
+MAINTAINER Kaliiixx <modepadu95@riseup.net> 
 
 #
 # Prepare the container

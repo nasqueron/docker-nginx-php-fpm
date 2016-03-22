@@ -47,3 +47,4 @@ To create an image for an application with thisas base, create a Dockerfile:
     # If you need other processes, adds a /etc/service/<service name>/run file
 
 That's it.
+# docker-arm-nginx-php-fpm
