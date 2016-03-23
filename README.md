@@ -47,9 +47,6 @@ To create an image for an application with thisas base, create a Dockerfile:
     # If you need other processes, adds a /etc/service/<service name>/run file
 
 That's it.
-<<<<<<< HEAD
-# docker-arm-nginx-php-fpm
-=======
 
 ## How to upgrade this image?
 
@@ -60,4 +57,3 @@ For that, you can use our helper Makefile:
 cd novolume
 make update
 ```
->>>>>>> 4e6ef53562dafae51fbd8da1dbaf50148bbda6aa
