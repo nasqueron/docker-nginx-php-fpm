@@ -23,14 +23,15 @@ ENV PHP_BUILD_DEPS bzip2 \
 		libssl-dev \
 		libxslt1-dev \
 		libxml2-dev
-ENV LANG en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
+ENV LANG C.UTF-8
 
 RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
     gcc libc-dev make pkg-config nginx-full \
-    runit nano less tmux wget git \
+    runit nano less tmux wget git locales \
     $PHP_BUILD_DEPS $PHP_EXTRA_BUILD_DEPS \
     --no-install-recommends && rm -r /var/lib/apt/lists/*
+
+RUN dpkg-reconfigure locales 
 
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3 0BD78B5F97500D450838F95DFE857D9A90D90EC1 \
 	&& mkdir -p $PHP_INI_DIR/conf.d \
