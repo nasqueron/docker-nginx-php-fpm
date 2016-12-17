@@ -79,7 +79,7 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys 6E4F6AB321FDC07F2C332E3A
 RUN groupadd -r app -g 433 && \
 	mkdir /home/app && \
 	mkdir -p /var/wwwroot/default && \
-	useradd -u 431 -r -g app -d /home/app -s /sbin/nologin -c "Docker image user for web application" app && \
+	useradd -u 431 -r -g app -d /home/app -s /usr/sbin/nologin -c "Docker image user for web application" app && \
 	chown -R app:app /home/app /var/wwwroot/default && \
 	chmod 700 /home/app && \
 	chmod 711 /var/wwwroot/default
