@@ -30,9 +30,8 @@ RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
     gcc libc-dev make pkg-config nginx-full \
     runit nano less tmux wget git locales \
     $PHP_BUILD_DEPS $PHP_EXTRA_BUILD_DEPS \
-    --no-install-recommends && rm -r /var/lib/apt/lists/*
-
-RUN dpkg-reconfigure locales 
+    --no-install-recommends && rm -r /var/lib/apt/lists/* \
+    && dpkg-reconfigure locales
 
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 	6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3 \
