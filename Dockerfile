@@ -9,7 +9,7 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 # Prepare the container
 #
 
-ENV PHP_VERSION 7.1.0
+ENV PHP_VERSION 7.1.1
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_BUILD_DEPS bzip2 \
@@ -37,6 +37,7 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 	6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3 \
 	0BD78B5F97500D450838F95DFE857D9A90D90EC1 \
 	A917B1ECDA84AEC2B568FED6F50ABC807BD5DCD0 \
+	528995BFEDFBA7191D46839EF9BA0ADA31CBD89E \
 	&& mkdir -p $PHP_INI_DIR/conf.d \
 	&& set -x \
 	&& curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2/from/this/mirror" -o php.tar.bz2 \
