@@ -9,7 +9,7 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 # Prepare the container
 #
 
-ENV PHP_VERSION 7.1.12
+ENV PHP_VERSION 7.2.0
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_BUILD_DEPS bzip2 \
@@ -34,9 +34,8 @@ RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
     && dpkg-reconfigure locales
 
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
-	6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3 \
-	0BD78B5F97500D450838F95DFE857D9A90D90EC1 \
-	A917B1ECDA84AEC2B568FED6F50ABC807BD5DCD0 \
+	B1B44D8F021E4E2D6021E995DC9FF8D3EE5AF27F \
+	1729F83938DA44E27BA0F4D3DBDB397470D12172 \
 	&& mkdir -p $PHP_INI_DIR/conf.d \
 	&& set -x \
 	&& curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2/from/this/mirror" -o php.tar.bz2 \
@@ -61,7 +60,6 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 		--with-curl \
 		--with-gd \
 		--with-jpeg-dir \
-		--enable-gd-native-ttf \
 		--enable-ftp \
 		--with-libedit \
 		--enable-mbstring \
