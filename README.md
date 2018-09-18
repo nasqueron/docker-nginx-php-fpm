@@ -14,7 +14,7 @@ The PHP last 7.1 version is compiled through a build process borrowed from
 the official PHP Docker image, with [this Dockerfile used](https://github.com/docker-library/php/blob/08bf31dfd492f02a2696c9a30eb85326b1570abd/5.6/fpm/Dockerfile).
 
 We add common extensions like calendar, curl, gd, iconv, libxml, mbstring,
-mcrypt, mysqli, PDO MySQL and pcntl. The Pear, PECL executables and utilities
+mysqli, PDO MySQL and pcntl. The Pear, PECL executables and utilities
 (including build stuff like phpize) are available too.
 
 Once running, you can quickly add PHP extensions to this image,
