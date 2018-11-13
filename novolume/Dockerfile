@@ -65,6 +65,7 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 		--with-freetype-dir \
 		--with-xpm-dir \
 		--with-webp-dir \
+		--enable-exif \
 		--enable-ftp \
 		--with-libedit \
 		--enable-mbstring \
