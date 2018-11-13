@@ -18,6 +18,9 @@ ENV PHP_BUILD_DEPS bzip2 \
 		libcurl4-openssl-dev \
 		libjpeg-dev \
 		libpng12-dev \
+		libxpm-dev \
+		libwebp-dev \
+		libfreetype6-dev \
 		libreadline6-dev \
 		libssl-dev \
 		libxslt1-dev \
@@ -59,6 +62,9 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 		--with-curl \
 		--with-gd \
 		--with-jpeg-dir \
+		--with-freetype-dir \
+		--with-xpm-dir \
+		--with-webp-dir \
 		--enable-ftp \
 		--with-libedit \
 		--enable-mbstring \
