@@ -9,7 +9,8 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 # Prepare the container
 #
 
-ENV PHP_VERSION 7.3.14
+ENV PHP_VERSION 7.4.2
+ENV ONIGURAMA_VERSION 6.9.4
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_BUILD_DEPS bzip2 \
@@ -47,6 +48,11 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 	&& mkdir -p /usr/src/php \
 	&& tar -xof php.tar.bz2 -C /usr/src/php --strip-components=1 \
 	&& rm php.tar.bz2* \
+	&& wget -O /usr/src/onigurama.tar.gz https://github.com/kkos/oniguruma/releases/download/v$ONIGURAMA_VERSION/onig-$ONIGURAMA_VERSION.tar.gz \
+	&& cd /usr/src \
+	&& tar xzf onigurama.tar.gz \
+	&& cd onig-$ONIGURAMA_VERSION \
+	&& ./configure && make && make install \
 	&& cd /usr/src/php \
 	&& export CFLAGS="-fstack-protector-strong -fpic -fpie -O2" \
 	&& export CPPFLAGS="$CFLAGS" \
@@ -61,11 +67,11 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 		--with-bz2 \
 		--enable-calendar \
 		--with-curl \
-		--with-gd \
-		--with-jpeg-dir \
-		--with-freetype-dir \
-		--with-xpm-dir \
-		--with-webp-dir \
+		--enable-gd \
+		--with-jpeg \
+		--with-freetype \
+		--with-xpm \
+		--with-webp \
 		--enable-exif \
 		--enable-ftp \
 		--with-libedit \
@@ -77,8 +83,8 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 		--with-xsl \
 		--with-readline \
 		--with-zlib \
-		--enable-zip \
-		--with-libzip \
+		--with-zip \
+		--with-pear \
 	&& make -j"$(nproc)" \
 	&& make install \
 	&& { find /usr/local/bin /usr/local/sbin -type f -executable -exec strip --strip-all '{}' + || true; } \

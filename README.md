@@ -10,7 +10,7 @@ with `nasqueron/nginx-php7-fpm` image as base image.
 Your web directory — if you don't add vhosts — is
 `/var/wwwroot/default` (mounted as volume).
 
-The PHP last 7.1 version is compiled through a build process borrowed from
+The PHP last 7 version is compiled through a build process borrowed from
 the official PHP Docker image, with [this Dockerfile used](https://github.com/docker-library/php/blob/08bf31dfd492f02a2696c9a30eb85326b1570abd/5.6/fpm/Dockerfile).
 
 We add common extensions like calendar, curl, gd, iconv, libxml, mbstring,
