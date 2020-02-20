@@ -38,8 +38,8 @@ RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
     && dpkg-reconfigure locales
 
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
-	CBAF69F173A0FEA4B537F470D66C9593118BCCB6 \
-	F38252826ACD957EF380D39F2F7956BC5DA04B5D \
+	5A52880781F755608BF815FC910DEB46F53EA312 \
+	42670A7FE4D0441C8E4632349E4FDC074A4EF02D \
 	&& mkdir -p $PHP_INI_DIR/conf.d \
 	&& set -x \
 	&& curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2/from/this/mirror" -o php.tar.bz2 \
