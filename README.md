@@ -40,11 +40,11 @@ with http://localhost:8080 as address:
 
     docker run -d -v /data/awesome-php-app:/var/wwwroot/default -p 8080:80 nasqueron/nginx-php7-fpm
 
-To create an image for an application with thisas base, create a Dockerfile:
+To create an image for an application with this as base, create a Dockerfile:
 
     FROM nasqueron/docker-nginx-php7-fpm
     # Debian commands to deploy your application code
-    # If you need other processes, adds a /etc/service/<service name>/run file
+    # If you need other processes, add a /etc/service/<service name>/run file
 
 That's it.
 
