@@ -10,7 +10,7 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 #
 
 ENV PHP_VERSION 7.4.3
-ENV ONIGURAMA_VERSION 6.9.4
+ENV ONIGURAMA_VERSION 6.9.7.1
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_BUILD_DEPS bzip2 \
@@ -49,9 +49,9 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-keys \
 	&& tar -xof php.tar.bz2 -C /usr/src/php --strip-components=1 \
 	&& rm php.tar.bz2* \
 	&& wget -O /usr/src/onigurama.tar.gz https://github.com/kkos/oniguruma/releases/download/v$ONIGURAMA_VERSION/onig-$ONIGURAMA_VERSION.tar.gz \
-	&& cd /usr/src \
-	&& tar xzf onigurama.tar.gz \
-	&& cd onig-$ONIGURAMA_VERSION \
+	&& mkdir /usr/src/onigurama \
+	&& cd /usr/src/onigurama \
+	&& tar xzf ../onigurama.tar.gz --strip-components=1 \
 	&& ./configure && make && make install \
 	&& cd /usr/src/php \
 	&& export CFLAGS="-fstack-protector-strong -fpic -fpie -O2" \
