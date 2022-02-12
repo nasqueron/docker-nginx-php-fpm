@@ -115,4 +115,4 @@ VOLUME ["/var/wwwroot/default", "/etc/nginx"]
 EXPOSE 80
 EXPOSE 443
 
-CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]
+CMD ["/usr/local/sbin/runsvdir-init"]

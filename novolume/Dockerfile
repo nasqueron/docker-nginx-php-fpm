@@ -2,7 +2,7 @@
 # Nasqueron  - Base nginx / php-fpm image
 #
 
-FROM debian:jessie
+FROM debian:bullseye-slim
 MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-win.org>
 
 #
@@ -19,7 +19,7 @@ ENV PHP_BUILD_DEPS bzip2 \
 		libzip-dev \
 		libcurl4-openssl-dev \
 		libjpeg-dev \
-		libpng12-dev \
+		libpng-dev \
 		libxpm-dev \
 		libwebp-dev \
 		libfreetype6-dev \
@@ -31,10 +31,11 @@ ENV LANG C.UTF-8
 
 RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
     libedit-dev libsqlite3-dev xz-utils \
-    gcc libc-dev make pkg-config nginx-full \
+    gcc libc-dev make pkg-config nginx-full gnupg \
     runit nano less tmux wget git locales unzip \
     $PHP_BUILD_DEPS $PHP_EXTRA_BUILD_DEPS \
-    --no-install-recommends && rm -r /var/lib/apt/lists/* \
+    --no-install-recommends && apt-get autoremove -y && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && dpkg-reconfigure locales
 
 RUN gpg --keyserver keyserver.ubuntu.com --recv-keys \
