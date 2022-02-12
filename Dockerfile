@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
     --no-install-recommends && rm -r /var/lib/apt/lists/* \
     && dpkg-reconfigure locales
 
-RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
+RUN gpg --keyserver keyserver.ubuntu.com --recv-keys \
 	5A52880781F755608BF815FC910DEB46F53EA312 \
 	42670A7FE4D0441C8E4632349E4FDC074A4EF02D \
 	&& mkdir -p $PHP_INI_DIR/conf.d \
