@@ -2,7 +2,7 @@
 # Nasqueron  - Base nginx / php-fpm image
 #
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-win.org>
 
 #
