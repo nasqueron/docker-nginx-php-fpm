@@ -23,7 +23,7 @@ with `docker-php-ext-configure` and `docker-php-ext-install` scripts.
 Nginx is installed through the [nginx-full Debian package](https://wiki.debian.org/Nginx).
 SSL is ready if needed at the container level (we expose ports 80 and 443).
 
-Services are managed by [runit](http://smarden.org/runit/) in `/etc/service` directory.
+Services are managed by [runit](http://smarden.org/runit/) in `/var/service` directory.
 
 ## How to use it
 
@@ -44,7 +44,7 @@ To create an image for an application with this as base, create a Dockerfile:
 
     FROM nasqueron/docker-nginx-php7-fpm
     # Debian commands to deploy your application code
-    # If you need other processes, add a /etc/service/<service name>/run file
+    # If you need other processes, add a /var/service/<service name>/run file
 
 That's it.
 

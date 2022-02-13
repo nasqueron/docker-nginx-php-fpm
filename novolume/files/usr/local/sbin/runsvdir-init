@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/bin/runsvdir -P /etc/service
+/usr/bin/runsvdir -P /var/service
