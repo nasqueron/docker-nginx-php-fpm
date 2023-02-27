@@ -2,23 +2,27 @@
 # Nasqueron  - Base nginx / php-fpm image
 #
 
-FROM debian:jessie
+FROM debian:bullseye-slim
 MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-win.org>
 
 #
 # Prepare the container
 #
 
-ENV PHP_VERSION 5.6.40
+ENV PHP_VERSION 7.4.27
+ENV ONIGURAMA_VERSION=6.9.7.1
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_BUILD_DEPS bzip2 \
 		file \
 		libbz2-dev \
+		libzip-dev \
 		libcurl4-openssl-dev \
 		libjpeg-dev \
-		libmcrypt-dev \
-		libpng12-dev \
+		libpng-dev \
+		libxpm-dev \
+		libwebp-dev \
+		libfreetype6-dev \
 		libreadline6-dev \
 		libssl-dev \
 		libxslt1-dev \
@@ -26,13 +30,17 @@ ENV PHP_BUILD_DEPS bzip2 \
 ENV LANG C.UTF-8
 
 RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
-    gcc libc-dev make pkg-config nginx-full \
+    libedit-dev libsqlite3-dev xz-utils \
+    gcc libc-dev make pkg-config nginx-full gnupg \
     runit nano less tmux wget git locales unzip \
     $PHP_BUILD_DEPS $PHP_EXTRA_BUILD_DEPS \
-    --no-install-recommends && rm -r /var/lib/apt/lists/* \
-    && dpkg-reconfigure locales
+    --no-install-recommends && apt-get autoremove -y && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    dpkg-reconfigure locales
 
-RUN gpg --keyserver keyserver.ubuntu.com --recv-keys 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3 0BD78B5F97500D450838F95DFE857D9A90D90EC1 \
+RUN gpg --keyserver keyserver.ubuntu.com --recv-keys \
+	5A52880781F755608BF815FC910DEB46F53EA312 \
+	42670A7FE4D0441C8E4632349E4FDC074A4EF02D \
 	&& mkdir -p $PHP_INI_DIR/conf.d \
 	&& set -x \
 	&& curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2/from/this/mirror" -o php.tar.bz2 \
@@ -41,7 +49,15 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-keys 6E4F6AB321FDC07F2C332E3AC2B
 	&& mkdir -p /usr/src/php \
 	&& tar -xof php.tar.bz2 -C /usr/src/php --strip-components=1 \
 	&& rm php.tar.bz2* \
+	&& wget -O /usr/src/onigurama.tar.gz https://github.com/kkos/oniguruma/releases/download/v$ONIGURAMA_VERSION/onig-$ONIGURAMA_VERSION.tar.gz \
+	&& mkdir /usr/src/onigurama \
+	&& cd /usr/src/onigurama \
+	&& tar xzf ../onigurama.tar.gz --strip-components=1 \
+	&& ./configure && make && make install \
 	&& cd /usr/src/php \
+	&& export CFLAGS="-fstack-protector-strong -fpic -fpie -O2" \
+	&& export CPPFLAGS="$CFLAGS" \
+	&& export LDFLAGS="-Wl,-O1 -Wl,--hash-style=both -pie" \
 	&& ./configure \
 		--with-config-file-path="$PHP_INI_DIR" \
 		--with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
@@ -52,11 +68,15 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-keys 6E4F6AB321FDC07F2C332E3AC2B
 		--with-bz2 \
 		--enable-calendar \
 		--with-curl \
-		--with-gd \
-		--with-jpeg-dir \
-		--enable-gd-native-ttf \
+		--enable-gd \
+		--with-jpeg \
+		--with-freetype \
+		--with-xpm \
+		--with-webp \
+		--enable-exif \
+		--enable-ftp \
+		--with-libedit \
 		--enable-mbstring \
-		--with-mcrypt \
 		--with-mysqli \
 		--with-pdo-mysql \
 		--enable-pcntl \
@@ -64,13 +84,14 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-keys 6E4F6AB321FDC07F2C332E3AC2B
 		--with-xsl \
 		--with-readline \
 		--with-zlib \
-		--enable-zip \
+		--with-zip \
+		--with-pear \
 	&& make -j"$(nproc)" \
 	&& make install \
 	&& { find /usr/local/bin /usr/local/sbin -type f -executable -exec strip --strip-all '{}' + || true; } \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps \
 	&& make clean \
-	&& pecl install APCu-4.0.10 \
+	&& pecl install APCu \
 	&& cd /opt \
 	&& curl -sS https://getcomposer.org/installer | php \
 	&& ln -s /opt/composer.phar /usr/local/bin/composer

@@ -1,3 +1,2 @@
-#!/bin/bash
-export > /usr/local/etc/envvars
-exec /usr/sbin/runsvdir-start
+#!/bin/sh
+/usr/bin/runsvdir -P /var/service
