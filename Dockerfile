@@ -9,8 +9,8 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 # Prepare the container
 #
 
-ENV PHP_VERSION 7.4.27
-ENV ONIGURAMA_VERSION=6.9.7.1
+ENV PHP_VERSION 8.2.3
+ENV ONIGURAMA_VERSION=6.9.8
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_BUILD_DEPS bzip2 \
@@ -39,8 +39,9 @@ RUN apt-get update && apt-get install -y ca-certificates curl libxml2 autoconf \
     dpkg-reconfigure locales
 
 RUN gpg --keyserver keyserver.ubuntu.com --recv-keys \
-	5A52880781F755608BF815FC910DEB46F53EA312 \
-	42670A7FE4D0441C8E4632349E4FDC074A4EF02D \
+	1198C0117593497A5EC5C199286AF1F9897469DC \
+	39B641343D8C104B2B146DC3F9C39DC0B9698544 \
+	E60913E4DF209907D8E30D96659A97C9CF2A795A \
 	&& mkdir -p $PHP_INI_DIR/conf.d \
 	&& set -x \
 	&& curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2/from/this/mirror" -o php.tar.bz2 \
