@@ -84,6 +84,7 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-keys \
 		--with-openssl \
 		--with-xsl \
 		--with-readline \
+		--enable-sockets \
 		--with-zlib \
 		--with-zip \
 		--with-pear \
