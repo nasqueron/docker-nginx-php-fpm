@@ -15,6 +15,7 @@ ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=a
 ENV PHP_INI_DIR /usr/local/etc/php
 ENV PHP_BUILD_DEPS bzip2 \
 		file \
+		g++ \
 		libbz2-dev \
 		libzip-dev \
 		libcurl4-openssl-dev \
@@ -76,6 +77,7 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-keys \
 		--with-webp \
 		--enable-exif \
 		--enable-ftp \
+		--enable-intl \
 		--with-libedit \
 		--enable-mbstring \
 		--with-mysqli \
