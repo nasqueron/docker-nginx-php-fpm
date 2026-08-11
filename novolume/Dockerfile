@@ -2,7 +2,7 @@
 # Nasqueron  - Base nginx / php-fpm image
 #
 
-FROM debian:bullseye-slim
+FROM debian:trixie-slim
 MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-win.org>
 
 #
@@ -19,12 +19,13 @@ ENV PHP_BUILD_DEPS bzip2 \
 		libbz2-dev \
 		libzip-dev \
 		libcurl4-openssl-dev \
+		libicu-dev \
 		libjpeg-dev \
 		libpng-dev \
 		libxpm-dev \
 		libwebp-dev \
-		libfreetype6-dev \
-		libreadline6-dev \
+		libfreetype-dev \
+		libreadline-dev \
 		libssl-dev \
 		libxslt1-dev \
 		libxml2-dev
