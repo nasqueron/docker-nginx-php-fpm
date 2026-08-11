@@ -27,6 +27,7 @@ ENV PHP_BUILD_DEPS bzip2 \
 		libfreetype-dev \
 		libreadline-dev \
 		libssl-dev \
+		libsodium-dev \
 		libxslt1-dev \
 		libxml2-dev
 ENV LANG C.UTF-8
@@ -88,6 +89,7 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-keys \
 		--with-xsl \
 		--with-readline \
 		--enable-sockets \
+		--with-sodium \
 		--with-zlib \
 		--with-zip \
 		--with-pear \
