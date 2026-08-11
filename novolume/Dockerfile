@@ -46,8 +46,8 @@ RUN gpg --keyserver keyserver.ubuntu.com --recv-keys \
 	E60913E4DF209907D8E30D96659A97C9CF2A795A \
 	&& mkdir -p $PHP_INI_DIR/conf.d \
 	&& set -x \
-	&& curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2/from/this/mirror" -o php.tar.bz2 \
-	&& curl -SL "http://php.net/get/php-$PHP_VERSION.tar.bz2.asc/from/this/mirror" -o php.tar.bz2.asc \
+	&& curl -SL "https://www.php.net/distributions/php-$PHP_VERSION.tar.bz2" -o php.tar.bz2 \
+	&& curl -SL "https://www.php.net/distributions/php-$PHP_VERSION.tar.bz2.asc" -o php.tar.bz2.asc \
 	&& gpg --verify php.tar.bz2.asc \
 	&& mkdir -p /usr/src/php \
 	&& tar -xof php.tar.bz2 -C /usr/src/php --strip-components=1 \
